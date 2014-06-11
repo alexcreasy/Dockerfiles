@@ -8,7 +8,7 @@ RUN yum -y install postgresql-server
 USER postgres
 RUN pg_ctl initdb -D /var/lib/pgsql/data
 RUN echo "host all  all    0.0.0.0/0  md5" >> /var/lib/pgsql/data/pg_hba.conf
-RUN echo "listen_addresses='*'" >> /var/lib/pgsql/data/postgresql.conf
+RUN curl https://raw.githubusercontent.com/alexcreasy/Dockerfiles/master/postgresql.conf > /var/lib/pgsql/data/postgresql.conf 
 
 # Create rhqadmin user and rhq database
 RUN pg_ctl start -w -t 30 -D /var/lib/pgsql/data;\
